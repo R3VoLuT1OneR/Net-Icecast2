@@ -1,0 +1,80 @@
+=head1 NAME
+
+Net::Icecast2 - Icecast2 Server API
+
+=head1 SYNOPSIS
+
+  use Net::Icecast2;
+
+  my $net_icecast = new Net::Icecast2(
+      host => 192.168.1.10,
+      port => 8008,
+      protocol => 'https',
+      login    => 'source',
+      password => 'hackme',
+  );
+
+  # Make request to "/admin/stats"
+  $net_icecast->request( '/stats' );
+
+=head1 DESCRIPTION
+
+Make requsts and parse XML response from Icecast2 API
+
+=head1 ATTRIBUTES
+
+=head2 host
+
+  Description : Icecast2 Server hostname
+  Default     : localhost
+  Required    : 0
+
+=head2 port
+
+  Description : Icecast2 Server port
+  Default     : 8000
+  Required    : 0
+
+=head2 protocol
+
+  Description : Icecast2 Server protocol ( scheme )
+  Default     : http
+  Required    : 0
+
+=head2 login
+
+  Description : Icecast2 Server API login
+  Required    : 1
+
+=head2 password
+
+  Description : Icecast2 Server API password
+  Required    : 1
+
+=head1 METHODS
+
+=head2 request
+
+  Usage       : $net_icecast->request( '/stats' );
+  Arguments   : Path to API action that goes after '/admin'
+  Description : Method for making request to Icecast2 Server API
+  Return      : Parsed XML server request
+
+=head1 SEE ALSO
+
+Icecast2 server: http://www.icecast.org
+Icecast2 API Docs: http://www.icecast.org/docs/icecast-trunk/icecast2_admin.html
+
+Related modules L<Net::Icecast2::Admin> L<Net::Icecast2::Mount>
+
+=head1 AUTHOR
+
+Pavel R3VoLuT1OneR Zhytomirsky <r3volut1oner@gmail.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2012 by Pavel R3VoLuT1OneR Zhytomirsky.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
