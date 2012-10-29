@@ -205,7 +205,7 @@ sub kill_client {
     $self->_make_request( '/killclient', id => $client_id );
 }
 
-=head kill_source
+=head2 kill_source
 
   Usage       : $icecast_mount->kill_source;
   Arguments   : No Argements

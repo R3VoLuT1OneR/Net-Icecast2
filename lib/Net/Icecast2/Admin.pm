@@ -68,7 +68,7 @@ Make request for Icecast2 Server Admin API
 
 =head1 METHODS
 
-=head2 get_server_stats
+=head2 stats
 
   Usage        : $icecast_admin->stats
   Description  : This admin function provides the ability to query the internal
@@ -85,7 +85,7 @@ sub stats {
     $self->request( '/stats' );
 }
 
-=head2 get_mountpoints_list
+=head2 list_mounts
 
   Usage       : $icecast_admin->list_mounts
   Description : This admin function provides the ability to view all the
