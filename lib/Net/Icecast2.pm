@@ -16,7 +16,7 @@ Net::Icecast2 - Icecast2 Server API
 
   use Net::Icecast2;
 
-  my $net_icecast = new Net::Icecast2(
+  my $net_icecast = Net::Icecast2->new(
       host => 192.168.1.10,
       port => 8008,
       protocol => 'https',
@@ -140,7 +140,7 @@ sub request {
     $response->is_success or croak 'Error on request: ' .
         ( $response->code eq 401 ? 'wrong credentials' : $response->status_line );
 
-    new XML::Simple->XMLin( $response->content );
+    XML::Simple->new->XMLin( $response->content );
 }
 
 no Moo;
