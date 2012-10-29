@@ -16,7 +16,7 @@ Net::Icecast2::Mount - Icecast2 Server Mount API
 
   use Net::Icecast2::Mount;
 
-  my $icecast_mount = new Net::Icecast2::Mount(
+  my $icecast_mount = Net::Icecast2::Mount->new(
       host => 192.168.1.10,
       port => 8008,
       protocol => 'https',

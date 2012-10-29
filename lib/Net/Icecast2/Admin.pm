@@ -11,7 +11,7 @@ Net::Icecast2::Admin - Icecast2 Server Admin API
 
   use Net::Icecast2::Admin;
 
-  my $icecast_admin = new Net::Icecast2::Admin(
+  my $icecast_admin = Net::Icecast2::Admin->new(
       host => 192.168.1.10,
       port => 8008,
       protocol => 'https',
