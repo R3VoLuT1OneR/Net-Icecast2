@@ -4,14 +4,14 @@ use Test::More;
 use Test::Fatal;
 use Test::MockModule;
 
-my $ua_mock = new Test::MockModule('LWP::UserAgent');
+my $ua_mock = Test::MockModule->new('LWP::UserAgent');
 $ua_mock->mock( 'get', \&ua_mock_get );
 
 plan tests => 4;
 
     use_ok( 'Net::Icecast2::Admin' );
 
-    my $icecast_admin = new Net::Icecast2::Admin(
+    my $icecast_admin = Net::Icecast2::Admin->new(
         login    => 'test_admin',
         password => 'test_password',
     );
@@ -35,13 +35,13 @@ done_testing;
 sub ua_mock_get {
     my $ua   = shift;
     my $path = shift;
-    my $head = new HTTP::Headers;
+    my $head = HTTP::Headers->new;
 
     $path =~ /\/(stats)$/g
-        and return new HTTP::Response( 200, '', $head,
+        and return HTTP::Response->new( 200, '', $head,
         "<request><message>$1 success</message></request>");
 
     $path =~ /\/(listmounts)$/g
-        and return new HTTP::Response( 200, '', $head,
+        and return HTTP::Response->new( 200, '', $head,
         "<request><source><message>$1 success</message></source></request>");
 }

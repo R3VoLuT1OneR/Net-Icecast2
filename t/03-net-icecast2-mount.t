@@ -4,7 +4,7 @@ use Test::More;
 use Test::Fatal;
 use Test::MockModule;
 
-my $mock_ua = new Test::MockModule('LWP::UserAgent');
+my $mock_ua = Test::MockModule->new('LWP::UserAgent');
 $mock_ua->mock( 'get', \&ua_get_mock );
 
 plan tests => 9;
@@ -12,12 +12,12 @@ plan tests => 9;
     use_ok( 'Net::Icecast2::Mount' );
 
     like(
-        exception { new Net::Icecast2::Mount },
+        exception { Net::Icecast2::Mount->new },
         qr/^Missing required arguments: mount, password at/,
         'Validate required attributes',
     );
 
-    my $icecast_mount = new Net::Icecast2::Mount(
+    my $icecast_mount = Net::Icecast2::Mount->new(
         password => 'mount_password',
         mount    => 'mount_test',
     );
@@ -65,30 +65,30 @@ done_testing;
 sub ua_get_mock {
     my $ua   = shift;
     my $path = shift;
-    my $head = new HTTP::Headers;
+    my $head = HTTP::Headers->new;
 
     $path =~ /\/metadata\?data2=r&mode=updinfo&mount=mount_test&data1=d$/g
-        and return new HTTP::Response( 200, '', $head,
+        and return HTTP::Response->new( 200, '', $head,
             '<xml><data1>d</data1><data2>r</data2></xml>');
 
     $path =~ /\/fallbacks\?mount=mount_test&fallback=(.*)$/g
-        and return new HTTP::Response( 200, '', $head,
+        and return HTTP::Response->new( 200, '', $head,
             "<xml><message>$1 success</message></xml>");
 
     $path =~ /\/(listclients)\?mount=mount_test$/g
-        and return new HTTP::Response( 200, '', $head,
+        and return HTTP::Response->new( 200, '', $head,
             "<xml><message>$1 success</message></xml>");
 
     $path =~ /\/moveclients\?destination=(.*)&mount=mount_test$/g
-        and return new HTTP::Response( 200, '', $head,
+        and return HTTP::Response->new( 200, '', $head,
             "<xml><message>$1 success</message></xml>");
 
     $path =~ /\/killclient\?mount=mount_test&id=(.*)$/g
-        and return new HTTP::Response( 200, '', $head,
+        and return HTTP::Response->new( 200, '', $head,
             "<xml><message>$1 success</message></xml>");
 
     $path =~ /\/(killsource)\?mount=mount_test$/g
-        and return new HTTP::Response( 200, '', $head,
+        and return HTTP::Response->new( 200, '', $head,
             "<xml><message>$1 success</message></xml>");
 
     die "Not correct request: $path";
