@@ -6,7 +6,7 @@ Net::Icecast2 - Icecast2 Server API
 
   use Net::Icecast2;
 
-  my $net_icecast = new Net::Icecast2(
+  my $net_icecast = Net::Icecast2->new(
       host => 192.168.1.10,
       port => 8008,
       protocol => 'https',
