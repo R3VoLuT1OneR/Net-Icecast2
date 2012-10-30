@@ -99,8 +99,9 @@ has password => (
 has _user_agent => (
     is       => 'ro',
     isa      => quote_sub( q{
-        ref $_[0] eq 'LWP::UserAgent'
-            or die "_user_agent should be 'LWP::UserAgent' ref";
+        use Safe::Isa;
+        $_[0]->$_isa('LWP::UserAgent')
+            or die "_user_agent should be 'LWP::UserAgent'";
     }),
     lazy     => 1,
     builder  => '_build__user_agent',
