@@ -4,6 +4,7 @@ use Moo;
 use MooX::Types::MooseLike::Base qw(Str Int);
 
 use Carp;
+use Safe::Isa;
 use Sub::Quote qw( quote_sub );
 use LWP::UserAgent;
 use XML::Simple;
