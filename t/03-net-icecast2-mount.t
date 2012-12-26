@@ -3,13 +3,12 @@ use strict;
 use Test::More;
 use Test::Fatal;
 use Test::MockModule;
+use Net::Icecast2::Mount;
 
 my $mock_ua = Test::MockModule->new('LWP::UserAgent');
 $mock_ua->mock( 'get', \&ua_get_mock );
 
 plan tests => 9;
-
-    use_ok( 'Net::Icecast2::Mount' );
 
     like(
         exception { Net::Icecast2::Mount->new },
@@ -21,6 +20,8 @@ plan tests => 9;
         password => 'mount_password',
         mount    => 'mount_test',
     );
+
+    isa_ok( $icecast_mount, 'Net::Icecast2', 'Net::Icecast2::Mount' );
 
     is( $icecast_mount->login, 'source', 'Validate default username' );
 

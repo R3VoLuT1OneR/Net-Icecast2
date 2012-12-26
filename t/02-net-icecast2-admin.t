@@ -3,20 +3,19 @@ use strict;
 use Test::More;
 use Test::Fatal;
 use Test::MockModule;
+use Net::Icecast2::Admin;
 
 my $ua_mock = Test::MockModule->new('LWP::UserAgent');
 $ua_mock->mock( 'get', \&ua_mock_get );
 
-plan tests => 4;
-
-    use_ok( 'Net::Icecast2::Admin' );
+plan tests => 3;
 
     my $icecast_admin = Net::Icecast2::Admin->new(
         login    => 'test_admin',
         password => 'test_password',
     );
 
-    isa_ok( $icecast_admin, 'Net::Icecast2::Admin' );
+    isa_ok( $icecast_admin, 'Net::Icecast2', 'Net::Icecast2::Admin' );
 
     is_deeply(
         $icecast_admin->stats,
