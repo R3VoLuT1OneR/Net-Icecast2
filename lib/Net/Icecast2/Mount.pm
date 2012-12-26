@@ -55,9 +55,11 @@ Make request for Icecast2 Server Mount API
 =cut
 
 =head2 protocol
+
   Description : Icecast2 Server protocol ( scheme )
   Default     : http
   Required    : 0
+
 =cut
 
 =head2 login
